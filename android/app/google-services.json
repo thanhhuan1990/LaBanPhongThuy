@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1026425787185",
+    "project_id": "la-ban-phong-thuy-cc293",
+    "storage_bucket": "la-ban-phong-thuy-cc293.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026425787185:android:d28f0b0dffd6eaa2ddd610",
+        "android_client_info": {
+          "package_name": "com.huanhuynh.la_ban_phong_thuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026425787185-2p758ip2ouocj42n084u8fi1hda7ep3c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4eFV7ZYavnDvMB8hJOf9RVw3anY-5nfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026425787185-2p758ip2ouocj42n084u8fi1hda7ep3c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
