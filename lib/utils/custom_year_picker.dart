@@ -32,19 +32,15 @@ class CustomYearPicker extends StatefulWidget {
   /// The [firstDate], [lastDate], [selectedDate], and [onChanged]
   /// arguments must be non-null. The [lastDate] must be after the [firstDate].
   CustomYearPicker({
-    Key key,
-    DateTime currentDate,
-    @required this.firstDate,
-    @required this.lastDate,
-    DateTime initialDate,
-    @required this.selectedDate,
-    @required this.onChanged,
+    Key? key,
+    DateTime? currentDate,
+    required this.firstDate,
+    required this.lastDate,
+    DateTime? initialDate,
+    required this.selectedDate,
+    required this.onChanged,
     this.dragStartBehavior = DragStartBehavior.start,
-  })  : assert(firstDate != null),
-        assert(lastDate != null),
-        assert(selectedDate != null),
-        assert(onChanged != null),
-        assert(!firstDate.isAfter(lastDate)),
+  })  : assert(!firstDate.isAfter(lastDate)),
         currentDate = DateUtils.dateOnly(currentDate ?? DateTime.now()),
         initialDate = DateUtils.dateOnly(initialDate ?? selectedDate),
         super(key: key);
@@ -79,7 +75,7 @@ class CustomYearPicker extends StatefulWidget {
 }
 
 class _CustomYearPickerState extends State<CustomYearPicker> {
-  ScrollController _scrollController;
+  late ScrollController _scrollController;
 
   // The approximate number of years necessary to fill the available space.
   static const int minYears = 18;
@@ -88,8 +84,6 @@ class _CustomYearPickerState extends State<CustomYearPicker> {
   void initState() {
     super.initState();
     _scrollController = ScrollController(initialScrollOffset: _scrollOffsetForYear(widget.selectedDate));
-    // WidgetsBinding.instance
-    //     .addPostFrameCallback((_) => {_scrollController.jumpTo(_scrollOffsetForYear(widget.selectedDate))});
   }
 
   double _scrollOffsetForYear(DateTime date) {
@@ -123,9 +117,9 @@ class _CustomYearPickerState extends State<CustomYearPicker> {
     } else {
       textColor = colorScheme.onSurface.withOpacity(0.87);
     }
-    final TextStyle itemStyle = textTheme.bodyText1?.apply(color: textColor);
+    final TextStyle? itemStyle = textTheme.bodyLarge?.apply(color: textColor);
 
-    BoxDecoration decoration;
+    BoxDecoration? decoration;
     if (isSelected) {
       decoration = BoxDecoration(
         color: colorScheme.primary,
