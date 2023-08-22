@@ -15,7 +15,6 @@ import '../utils/logger.dart';
 /// Copyright © 2021 by Huan.Huynh All rights reserved.
 class CompassController extends GetxController {
   final Rxn<BannerAd> anchoredBanner = Rxn<BannerAd>();
-  Timer? _timer;
 
   var count = 0.obs;
   increment() => count++;
@@ -40,14 +39,10 @@ class CompassController extends GetxController {
     });
 
     _createAnchoredBanner();
-    _initInterstitialAd();
   }
 
   @override
   void dispose() {
-    if (_timer?.isActive == true) {
-      _timer?.cancel();
-    }
     anchoredBanner.value?.dispose();
     super.dispose();
   }
@@ -113,14 +108,5 @@ class CompassController extends GetxController {
       ),
     );
     return banner.load();
-  }
-
-  void _initInterstitialAd() async {
-    if (_timer?.isActive == true) {
-      _timer?.cancel();
-    }
-    _timer = Timer.periodic(const Duration(minutes: 2), (Timer timer) {
-      AdHelper.createInterstitialAd();
-    });
   }
 }
