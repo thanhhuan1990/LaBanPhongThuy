@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ContactWidget extends StatelessWidget {
   ContactWidget({Key? key}) : super(key: key);
 
+  final double fontSize = 12;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +16,7 @@ class ContactWidget extends StatelessWidget {
           RichText(
             key: GlobalKey(),
             text: TextSpan(
-              style: TextStyle(color: Colors.grey, fontSize: 16.0),
+              style: TextStyle(color: Colors.grey, fontSize: fontSize),
               children: <TextSpan>[
                 TextSpan(text: 'Liên hệ Tác Giả: '),
                 TextSpan(
@@ -36,12 +37,10 @@ class ContactWidget extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: 6,
-          ),
+          SizedBox(height: 6),
           RichText(
             text: TextSpan(
-              style: TextStyle(color: Colors.grey, fontSize: 16.0),
+              style: TextStyle(color: Colors.grey, fontSize: fontSize),
               children: <TextSpan>[
                 TextSpan(text: 'Email: '),
                 TextSpan(
@@ -51,6 +50,19 @@ class ContactWidget extends StatelessWidget {
                       ..onTap = () {
                         _launch("mailto:thaithanh87@gmail.com");
                       }),
+              ],
+            ),
+          ),
+          SizedBox(height: 6),
+          RichText(
+            text: TextSpan(
+              style: TextStyle(color: Colors.grey, fontSize: fontSize),
+              children: <TextSpan>[
+                TextSpan(text: 'Ngân Hàng: '),
+                TextSpan(
+                  text: 'NamABank - 0913013489',
+                  style: TextStyle(color: Colors.blue),
+                ),
               ],
             ),
           ),

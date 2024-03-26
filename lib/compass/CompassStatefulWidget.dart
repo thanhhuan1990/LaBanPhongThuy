@@ -20,21 +20,30 @@ class CompassStatefulWidget extends StatefulWidget {
 }
 
 class CompassState extends State<CompassStatefulWidget> {
-  final CompassController controller = Get.find();
-
+  final CompassController controller = Get.put(CompassController());
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     return SafeArea(
       bottom: true,
       top: false,
-      child: Scaffold(
-        appBar: AppBar(
-            title: Obx(() => Text(
-                "Tự Xem Phong Thuỷ ${controller.hasPermissions.isTrue ? getDirection(controller.heading.value) : ""}"))),
-        body: Container(
-          color: Color(0xffF5F4F0),
-          padding: const EdgeInsets.only(bottom: 8, top: 8),
-          child: _buildMainPage(controller),
+      child: Obx(
+        () => Scaffold(
+          appBar: AppBar(
+            backgroundColor: controller.getAppColor(),
+            title: Obx(
+              () => Text(
+                "Tự Xem Phong Thuỷ ${controller.hasPermissions.isTrue ? getDirection(controller.heading.value) : ""}",
+              ),
+            ),
+            titleTextStyle: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+            ),
+          ),
+          body: Container(
+            color: Color(0xffF5F4F0),
+            child: _buildMainPage(controller),
+          ),
         ),
       ),
     );
@@ -47,7 +56,7 @@ class CompassState extends State<CompassStatefulWidget> {
             padding: const EdgeInsets.only(left: 8.0),
             child: Obx(() => Text(
                   "Mệnh: ${getNguHanh(controller.year.value)}",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 16),
                   maxLines: 1,
                 )),
           ),
@@ -55,7 +64,7 @@ class CompassState extends State<CompassStatefulWidget> {
             padding: const EdgeInsets.only(left: 8.0),
             child: Obx(() => Text(
                   "Can Chi: ${getCanChi(controller.year.value)}",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 16),
                   maxLines: 1,
                 )),
           ),
@@ -63,17 +72,12 @@ class CompassState extends State<CompassStatefulWidget> {
             padding: const EdgeInsets.only(left: 8.0),
             child: Obx(() => Text(
                   "Cung phi: ${getMenh(controller.gender.value, controller.year.value)}",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 16),
                   maxLines: 1,
                 )),
           ),
-          AspectRatio(
-            child: _buildCompass(),
-            aspectRatio: 1,
-          ),
-          Expanded(
-            child: _selector(),
-          ),
+          Expanded(child: _buildCompass()),
+          _selector(),
           ContactWidget(),
           Obx(() {
             return bottomBanner();
@@ -129,10 +133,17 @@ class CompassState extends State<CompassStatefulWidget> {
                   child:
                       Obx(() => Image.asset('assets/${getMenhImages(controller.gender.value, controller.year.value)}')),
                 ),
-                Image.asset('assets/Needle.png'),
+                FractionallySizedBox(
+                  widthFactor: 0.6, // Chiều rộng của Image.asset là 60% của Container
+                  heightFactor: 0.6, // Chiều cao của Image.asset là 60% của Container
+                  child: Image.asset(
+                    'assets/Needle.png',
+                  ),
+                ),
                 Text(
-                  'Thái Thạnh',
-                  style: TextStyle(color: controller.getAppColor(), fontSize: 24, fontWeight: FontWeight.bold),
+                  'Nguyễn Nhan\nThái Thạnh',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: controller.getAppColor(), fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -142,64 +153,67 @@ class CompassState extends State<CompassStatefulWidget> {
     );
   }
 
-  Widget _selector() => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: 1,
-            child: ScrollConfiguration(
-              behavior: ScrollBehavior(),
-              child: GlowingOverscrollIndicator(
-                axisDirection: AxisDirection.down,
-                color: Colors.transparent,
-                showLeading: false,
-                showTrailing: false,
-                child: CupertinoPicker(
-                  itemExtent: 50,
-                  scrollController: FixedExtentScrollController(initialItem: 0),
-                  children: [
-                    Container(
-                      height: 50,
-                      child: Center(
-                        child: Text(
-                          'Nam',
+  Widget _selector() => SizedBox(
+        height: 140,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: 1,
+              child: ScrollConfiguration(
+                behavior: ScrollBehavior(),
+                child: GlowingOverscrollIndicator(
+                  axisDirection: AxisDirection.down,
+                  color: Colors.transparent,
+                  showLeading: false,
+                  showTrailing: false,
+                  child: CupertinoPicker(
+                    itemExtent: 50,
+                    scrollController: FixedExtentScrollController(initialItem: 0),
+                    children: [
+                      Container(
+                        height: 50,
+                        child: Center(
+                          child: Text(
+                            'Nam',
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      height: 50,
-                      child: Center(child: Text('Nữ')),
-                    ),
-                  ],
-                  onSelectedItemChanged: (value) {
-                    controller.setGender(value == 0 ? "Nam" : "Nữ");
-                  },
+                      Container(
+                        height: 50,
+                        child: Center(child: Text('Nữ')),
+                      ),
+                    ],
+                    onSelectedItemChanged: (value) {
+                      controller.setGender(value == 0 ? "Nam" : "Nữ");
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Obx(() => ScrollConfiguration(
-                  behavior: ScrollBehavior(),
-                  child: GlowingOverscrollIndicator(
-                    axisDirection: AxisDirection.down,
-                    color: Colors.transparent,
-                    showLeading: false,
-                    showTrailing: false,
-                    child: CustomYearPicker(
-                      firstDate: DateTime(DateTime.now().year - 120, 1),
-                      lastDate: DateTime(DateTime.now().year + 20, 1),
-                      selectedDate: controller.year.value,
-                      onChanged: (DateTime dateTime) => controller.setYear(dateTime),
-                      currentDate: controller.year.value,
+            Expanded(
+              flex: 1,
+              child: Obx(() => ScrollConfiguration(
+                    behavior: ScrollBehavior(),
+                    child: GlowingOverscrollIndicator(
+                      axisDirection: AxisDirection.down,
+                      color: Colors.transparent,
+                      showLeading: false,
+                      showTrailing: false,
+                      child: CustomYearPicker(
+                        firstDate: DateTime(DateTime.now().year - 120, 1),
+                        lastDate: DateTime(DateTime.now().year + 20, 1),
+                        selectedDate: controller.year.value,
+                        onChanged: (DateTime dateTime) => controller.setYear(dateTime),
+                        currentDate: controller.year.value,
+                      ),
                     ),
-                  ),
-                )),
-          ),
-        ],
+                  )),
+            ),
+          ],
+        ),
       );
 
   Widget bottomBanner() {

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'compass/CompassController.dart';
 import 'compass/CompassStatefulWidget.dart';
 
 Future<void> main() async {
@@ -24,17 +23,8 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final CompassController controller = Get.put(CompassController());
-
-    return Obx(
-      () => MaterialApp(
-        title: 'Tự Xem Phong Thuỷ',
-        theme: ThemeData(
-          primarySwatch: controller.getAppColor(),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: CompassStatefulWidget(),
-      ),
+    return MaterialApp(
+      home: CompassStatefulWidget(),
     );
   }
 }
