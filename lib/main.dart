@@ -14,6 +14,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await AdHelper.gatherConsent();
   await MobileAds.instance.initialize();
+  AdHelper.createInterstitialAd();
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 

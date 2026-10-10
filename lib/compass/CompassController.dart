@@ -20,10 +20,20 @@ class CompassController extends GetxController {
   increment() => count++;
 
   var gender = "Nam".obs;
-  setGender(String gender) => this.gender.value = gender;
+  setGender(String gender) {
+    this.gender.value = gender;
+    _onProfileChanged();
+  }
 
   var year = DateTime.now().obs;
-  setYear(DateTime year) => this.year.value = year;
+  setYear(DateTime year) {
+    this.year.value = year;
+    _onProfileChanged();
+  }
+
+  // Wait until the user stops scrolling the pickers before treating it as one completed lookup.
+  static const Duration _lookupSettleDelay = Duration(milliseconds: 1500);
+  Timer? _lookupTimer;
 
   var hasPermissions = false.obs;
 
@@ -43,8 +53,14 @@ class CompassController extends GetxController {
 
   @override
   void onClose() {
+    _lookupTimer?.cancel();
     anchoredBanner.value?.dispose();
     super.onClose();
+  }
+
+  void _onProfileChanged() {
+    _lookupTimer?.cancel();
+    _lookupTimer = Timer(_lookupSettleDelay, AdHelper.onLookupCompleted);
   }
 
   void _fetchPermissionStatus() {
@@ -76,7 +92,7 @@ class CompassController extends GetxController {
     if (anchoredBanner.value != null) {
       return;
     }
-    final AnchoredAdaptiveBannerAdSize? size = await AdSize.getAnchoredAdaptiveBannerAdSize(
+    final AnchoredAdaptiveBannerAdSize? size = await AdSize.getLargeAnchoredAdaptiveBannerAdSizeWithOrientation(
       Orientation.portrait,
       Get.width.truncate(),
     );
