@@ -33,8 +33,15 @@ class CompassController extends GetxController {
     _onProfileChanged();
   }
 
-  // Wait until the user stops scrolling the pickers before treating it as one completed lookup.
-  static const Duration _lookupSettleDelay = Duration(milliseconds: 1500);
+  // A lookup is completed when, after changing gender/year, the user turns the phone
+  // and then holds it still (within _lookupStableDegrees) for _lookupStableDuration.
+  static const double _lookupMinRotationDegrees = 15;
+  static const double _lookupStableDegrees = 5;
+  static const Duration _lookupStableDuration = Duration(seconds: 2);
+  bool _awaitingLookup = false;
+  bool _hasRotatedSinceProfileChange = false;
+  double _profileChangedHeading = 0;
+  double _stableAnchorHeading = 0;
   Timer? _lookupTimer;
 
   var hasPermissions = false.obs;
@@ -65,8 +72,40 @@ class CompassController extends GetxController {
 
   void _onProfileChanged() {
     _lookupTimer?.cancel();
-    _lookupTimer = Timer(_lookupSettleDelay, AdHelper.onLookupCompleted);
+    _awaitingLookup = true;
+    _hasRotatedSinceProfileChange = false;
+    _profileChangedHeading = heading.value;
   }
+
+  void _trackLookupRotation(double currentHeading) {
+    if (!_awaitingLookup) {
+      return;
+    }
+    if (!_hasRotatedSinceProfileChange) {
+      if (_angleDistance(currentHeading, _profileChangedHeading) < _lookupMinRotationDegrees) {
+        return;
+      }
+      _hasRotatedSinceProfileChange = true;
+      _restartStableTimer(currentHeading);
+      return;
+    }
+    // Still turning: restart the "hold still" countdown from the new direction.
+    if (_angleDistance(currentHeading, _stableAnchorHeading) > _lookupStableDegrees) {
+      _restartStableTimer(currentHeading);
+    }
+  }
+
+  void _restartStableTimer(double anchorHeading) {
+    _stableAnchorHeading = anchorHeading;
+    _lookupTimer?.cancel();
+    _lookupTimer = Timer(_lookupStableDuration, () {
+      _awaitingLookup = false;
+      AdHelper.onLookupCompleted();
+    });
+  }
+
+  /// Smallest angle between two headings, in [0, 180].
+  double _angleDistance(double a, double b) => ((a - b + 540) % 360 - 180).abs();
 
   void _fetchPermissionStatus() {
     Permission.locationWhenInUse.status.then((status) {
@@ -99,6 +138,7 @@ class CompassController extends GetxController {
     }
     // flutter_compass reports [-180, 180]; normalize so getDirection() gets [0, 360).
     heading.value = (value % 360 + 360) % 360;
+    _trackLookupRotation(heading.value);
     sensorStatus.value = CompassSensorStatus.ready;
   }
 

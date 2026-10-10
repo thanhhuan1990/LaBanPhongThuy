@@ -77,14 +77,15 @@ class AdHelper {
 
   // Interstitial frequency rules: only shown at a natural break (after a completed lookup),
   // never right after launch, and with a cooldown between two ads.
-  static const Duration _interstitialFirstShowDelay = Duration(seconds: 60);
-  static const Duration _interstitialCooldown = Duration(seconds: 90);
-  static const int _lookupsPerInterstitial = 2;
+  static const Duration _interstitialFirstShowDelay = Duration(seconds: 5);
+  static const Duration _interstitialCooldown = Duration(seconds: 60);
+  static const int _lookupsPerInterstitial = 1;
   // A loaded interstitial is only valid for about one hour.
   static const Duration _interstitialExpiration = Duration(minutes: 55);
   static const int _maxInterstitialLoadRetries = 5;
 
-  static final DateTime _sessionStart = DateTime.now();
+  // Set when the first interstitial is preloaded at startup (static finals are lazy in Dart).
+  static DateTime? _sessionStart;
   static InterstitialAd? _interstitialAd;
   static DateTime? _interstitialLoadedAt;
   static DateTime? _lastInterstitialShownAt;
@@ -95,6 +96,7 @@ class AdHelper {
 
   /// Preloads an interstitial so it can be shown instantly at the next break point.
   static void createInterstitialAd({String? screen}) {
+    _sessionStart ??= DateTime.now();
     if (_interstitialAd != null || _isLoadingInterstitial) {
       return;
     }
@@ -129,7 +131,7 @@ class AdHelper {
     Timer(Duration(seconds: 1 << _interstitialLoadRetries), () => createInterstitialAd(screen: screen));
   }
 
-  /// Called when the user finishes a lookup (a new gender/year result is on screen).
+  /// Called when the user finishes a lookup (changed gender/year, turned the phone and held it still).
   /// Shows the preloaded interstitial if all frequency rules pass.
   static void onLookupCompleted() {
     _lookupsSinceInterstitial++;
@@ -141,24 +143,41 @@ class AdHelper {
   }
 
   static bool _canShowInterstitial() {
+    final String? skipReason = _interstitialSkipReason();
+    if (skipReason != null) {
+      logDebug('InterstitialAd skipped: $skipReason');
+    }
+    return skipReason == null;
+  }
+
+  static String? _interstitialSkipReason() {
     final DateTime now = DateTime.now();
-    if (_interstitialAd == null || _isShowingInterstitial) {
-      return false;
+    if (_isShowingInterstitial) {
+      return 'already showing';
+    }
+    if (_interstitialAd == null) {
+      return 'not loaded yet';
     }
     if (now.difference(_interstitialLoadedAt!) > _interstitialExpiration) {
       _interstitialAd!.dispose();
       _interstitialAd = null;
-      return false;
+      return 'expired';
     }
     if (WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed) {
-      return false;
+      return 'app not in foreground';
     }
-    if (_lookupsSinceInterstitial < _lookupsPerInterstitial ||
-        now.difference(_sessionStart) < _interstitialFirstShowDelay) {
-      return false;
+    if (_lookupsSinceInterstitial < _lookupsPerInterstitial) {
+      return 'lookups $_lookupsSinceInterstitial/$_lookupsPerInterstitial';
+    }
+    final Duration sinceStart = now.difference(_sessionStart ?? now);
+    if (sinceStart < _interstitialFirstShowDelay) {
+      return 'first ad allowed after ${_interstitialFirstShowDelay.inSeconds}s, now ${sinceStart.inSeconds}s';
     }
     final DateTime? lastShownAt = _lastInterstitialShownAt;
-    return lastShownAt == null || now.difference(lastShownAt) >= _interstitialCooldown;
+    if (lastShownAt != null && now.difference(lastShownAt) < _interstitialCooldown) {
+      return 'cooldown, ${now.difference(lastShownAt).inSeconds}s since last ad';
+    }
+    return null;
   }
 
   static void _showInterstitialAd() {
@@ -167,6 +186,7 @@ class AdHelper {
     _isShowingInterstitial = true;
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) {
+        logDebug('InterstitialAd shown');
         _lastInterstitialShownAt = DateTime.now();
         _lookupsSinceInterstitial = 0;
       },
