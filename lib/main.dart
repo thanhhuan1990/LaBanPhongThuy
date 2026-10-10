@@ -7,11 +7,13 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'compass/CompassStatefulWidget.dart';
+import 'utils/ad_helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await MobileAds.instance.initialize();
   await Firebase.initializeApp();
+  await AdHelper.gatherConsent();
+  await MobileAds.instance.initialize();
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 

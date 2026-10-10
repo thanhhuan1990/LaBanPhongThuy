@@ -42,9 +42,9 @@ class CompassController extends GetxController {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     anchoredBanner.value?.dispose();
-    super.dispose();
+    super.onClose();
   }
 
   void _fetchPermissionStatus() {
@@ -88,11 +88,7 @@ class CompassController extends GetxController {
 
     final BannerAd banner = BannerAd(
       size: size,
-      request: const AdRequest(
-        keywords: <String>['foo', 'bar'],
-        contentUrl: 'http://foo.com/bar.html',
-        nonPersonalizedAds: true,
-      ),
+      request: const AdRequest(),
       adUnitId: AdHelper.getBannerAdUnitId('Home'),
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
