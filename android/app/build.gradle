@@ -41,6 +41,7 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.release
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
 }
@@ -58,4 +59,7 @@ flutter {
 dependencies {
     implementation platform("com.google.firebase:firebase-bom:34.19.0")
     implementation "com.google.firebase:firebase-analytics"
+    // play-services-ads pulls work-runtime 2.7.0 (Room 2.2.5), whose WorkDatabase_Impl
+    // constructor gets stripped by R8 full mode and crashes on startup.
+    implementation "androidx.work:work-runtime:2.10.5"
 }
