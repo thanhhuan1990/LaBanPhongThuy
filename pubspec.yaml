@@ -24,22 +24,22 @@ dependencies:
   flutter:
     sdk: flutter
 
-  google_mobile_ads: 3.0.0
+  google_mobile_ads: 9.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^2.0.0
 
   # Firebase
-  firebase_core: 2.15.1
-  firebase_database: 10.2.5
-  firebase_crashlytics: 3.3.5
+  firebase_core: 4.15.0
+  firebase_database: 12.6.0
+  firebase_crashlytics: 5.4.0
 
-  get: 4.6.5
+  get: 4.7.3
 
-  flutter_compass: 0.7.0
-  permission_handler: 10.4.3
-  url_launcher: 6.1.12
+  flutter_compass: 0.8.1
+  permission_handler: 13.0.2
+  url_launcher: 6.3.3
 
 dev_dependencies:
   flutter_test:
@@ -89,3 +89,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+# permission_handler_android 14.x requires compileSdk 37, which AGP 9.1 cannot resolve yet.
+dependency_overrides:
+  permission_handler_android: 13.0.1
