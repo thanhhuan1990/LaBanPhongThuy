@@ -1,11 +1,9 @@
-import 'dart:math' as math;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_compass/flutter_compass.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:la_ban_phong_thuy/compass/widgets/contact_widget.dart';
+import 'package:la_ban_phong_thuy/compass/widgets/smooth_compass_rotation.dart';
 import 'package:la_ban_phong_thuy/utils/CanChiUtils.dart';
 import 'package:la_ban_phong_thuy/utils/custom_year_picker.dart';
 
@@ -86,10 +84,13 @@ class CompassState extends State<CompassStatefulWidget> {
       );
 
   Widget _buildCompass() {
-    return StreamBuilder<CompassEvent>(
-      stream: FlutterCompass.events,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
+    return Obx(() {
+      switch (controller.sensorStatus.value) {
+        case CompassSensorStatus.waiting:
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        case CompassSensorStatus.error:
           return Center(
               child: Text(
             'Thiết bị của bạn gặp lỗi với bộ phận cảm ứng!'
@@ -99,57 +100,53 @@ class CompassState extends State<CompassStatefulWidget> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16, height: 1.6),
           ));
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-
-        var direction = snapshot.data?.heading;
-
-        // if direction is null, then device does not support this sensor
-        // show error message
-        if (direction == null)
+        // Device does not have a compass sensor.
+        case CompassSensorStatus.unsupported:
           return Center(
             child: Text("Thiết bị của bạn gặp lỗi với bộ phận cảm ứng!"),
           );
+        case CompassSensorStatus.ready:
+          return _buildDial();
+      }
+    });
+  }
 
-        return Material(
-          shape: CircleBorder(),
-          clipBehavior: Clip.antiAlias,
-          child: Container(
-            padding: EdgeInsets.all(8),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
+  Widget _buildDial() {
+    return Material(
+      shape: CircleBorder(),
+      clipBehavior: Clip.antiAlias,
+      child: Container(
+        padding: EdgeInsets.all(8),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            SmoothCompassRotation(
+              headingStream: controller.heading.stream,
+              initialHeading: controller.heading.value,
+              child: Obx(() => Image.asset(
+                    'assets/${getMenhImages(controller.gender.value, controller.year.value)}',
+                    gaplessPlayback: true,
+                  )),
             ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Transform.rotate(
-                  angle: (direction * (math.pi / 180) * -1),
-                  child:
-                      Obx(() => Image.asset('assets/${getMenhImages(controller.gender.value, controller.year.value)}')),
-                ),
-                FractionallySizedBox(
-                  widthFactor: 0.6, // Chiều rộng của Image.asset là 60% của Container
-                  heightFactor: 0.6, // Chiều cao của Image.asset là 60% của Container
-                  child: Image.asset(
-                    'assets/Needle.png',
-                  ),
-                ),
-                Text(
-                  'Nguyễn Nhan\nThái Thạnh',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: controller.getAppColor(), fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
+            FractionallySizedBox(
+              widthFactor: 0.6, // Chiều rộng của Image.asset là 60% của Container
+              heightFactor: 0.6, // Chiều cao của Image.asset là 60% của Container
+              child: Image.asset(
+                'assets/Needle.png',
+              ),
             ),
-          ),
-        );
-      },
+            Text(
+              'Nguyễn Nhan\nThái Thạnh',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: controller.getAppColor(), fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

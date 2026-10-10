@@ -10,6 +10,8 @@ import 'package:permission_handler/permission_handler.dart';
 import '../utils/ad_helper.dart';
 import '../utils/logger.dart';
 
+enum CompassSensorStatus { waiting, ready, error, unsupported }
+
 /// Created by Huan.Huynh on 22/Apr/2021
 ///
 /// Copyright © 2021 by Huan.Huynh All rights reserved.
@@ -37,16 +39,18 @@ class CompassController extends GetxController {
 
   var hasPermissions = false.obs;
 
+  /// Heading in degrees, normalized to [0, 360).
   Rx<double> heading = 0.0.obs;
+  final Rx<CompassSensorStatus> sensorStatus = CompassSensorStatus.waiting.obs;
+  StreamSubscription<CompassEvent>? _compassSubscription;
 
   @override
   void onInit() {
     super.onInit();
 
-    Permission.locationWhenInUse.request().then((ignored) {
-      _fetchPermissionStatus();
-      _registerListener();
-    });
+    // The compass sensor does not need location permission, so start listening right away.
+    _registerListener();
+    Permission.locationWhenInUse.request().then((ignored) => _fetchPermissionStatus());
 
     _createAnchoredBanner();
   }
@@ -54,6 +58,7 @@ class CompassController extends GetxController {
   @override
   void onClose() {
     _lookupTimer?.cancel();
+    _compassSubscription?.cancel();
     anchoredBanner.value?.dispose();
     super.onClose();
   }
@@ -69,9 +74,33 @@ class CompassController extends GetxController {
     });
   }
 
-  void _registerListener() => FlutterCompass.events?.listen(_onData);
+  void _registerListener() {
+    final Stream<CompassEvent>? events = FlutterCompass.events;
+    if (events == null) {
+      sensorStatus.value = CompassSensorStatus.unsupported;
+      return;
+    }
+    _compassSubscription?.cancel();
+    _compassSubscription = events.listen(
+      _onData,
+      onError: (Object error) {
+        logError('Compass sensor error: $error');
+        sensorStatus.value = CompassSensorStatus.error;
+      },
+    );
+  }
 
-  void _onData(CompassEvent event) => heading.value = event.heading ?? 0;
+  void _onData(CompassEvent event) {
+    final double? value = event.heading;
+    // A null heading means the device has no compass sensor.
+    if (value == null) {
+      sensorStatus.value = CompassSensorStatus.unsupported;
+      return;
+    }
+    // flutter_compass reports [-180, 180]; normalize so getDirection() gets [0, 360).
+    heading.value = (value % 360 + 360) % 360;
+    sensorStatus.value = CompassSensorStatus.ready;
+  }
 
   MaterialColor getAppColor() {
     String nguHanh = getNguHanh(year.value);
