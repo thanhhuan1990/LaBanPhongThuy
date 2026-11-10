@@ -11,6 +11,7 @@ Feng shui / Spirituality (Tâm linh) · Compass (La bàn) · Lifestyle · Home &
 • Giao diện mới: hiện rõ hướng và số độ, Mệnh – Can Chi – Cung phi ngay đầu trang, màu theo ngũ hành
 • Chọn giới tính, năm sinh nhanh hơn
 • Thông tin tác giả Nguyễn Nhan Thái Thạnh gọn đẹp, gọi điện, email chỉ một chạm
+• Gợi ý ứng dụng tâm linh cùng nhà phát triển: lịch âm, văn khấn, xin xăm – đã cài thì mở nhanh
 • Hỗ trợ Android 16
 </vi-VN>
 ```
