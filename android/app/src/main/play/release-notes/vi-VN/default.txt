@@ -1,0 +1,4 @@
+• Giao diện mới: hiện rõ hướng và số độ, Mệnh – Can Chi – Cung phi ngay đầu trang, màu theo ngũ hành
+• Chọn giới tính, năm sinh nhanh hơn
+• Thông tin tác giả Nguyễn Nhan Thái Thạnh gọn đẹp, gọi điện, email chỉ một chạm
+• Hỗ trợ Android 16

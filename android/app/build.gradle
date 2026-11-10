@@ -57,6 +57,22 @@ flutter {
     source = "../.."
 }
 
+// ---- Phát hành lên Google Play (Gradle Play Publisher) ----
+// Key service account để NGOÀI repo: ~/.config/play/huanhuynh-play.json (hoặc biến môi trường PLAY_CREDENTIALS).
+// Không có key → bỏ qua. Upload AAB đã build bằng `flutter build appbundle`:
+//   cd android && ./gradlew publishReleaseBundle --artifact-dir ../build/app/outputs/bundle/release
+// Track internal, trạng thái nháp. Release note: src/main/play/release-notes/vi-VN/default.txt (≤ 500 ký tự).
+def playCredentials = file(System.getenv("PLAY_CREDENTIALS") ?: "${System.getProperty('user.home')}/.config/play/huanhuynh-play.json")
+if (playCredentials.exists()) {
+    apply plugin: "com.github.triplet.play"
+    play {
+        serviceAccountCredentials.set(playCredentials)
+        track.set("internal")
+        releaseStatus.set(com.github.triplet.gradle.androidpublisher.ReleaseStatus.DRAFT)
+        defaultToAppBundles.set(true)
+    }
+}
+
 dependencies {
     implementation platform("com.google.firebase:firebase-bom:34.19.0")
     implementation "com.google.firebase:firebase-analytics"
