@@ -1,29 +1,21 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:la_ban_phong_thuy/main.dart';
+import 'package:la_ban_phong_thuy/utils/CanChiUtils.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  test('directionName chia 8 hướng', () {
+    expect(directionName(0), 'Bắc');
+    expect(directionName(350), 'Bắc');
+    expect(directionName(45), 'Đông Bắc');
+    expect(directionName(90), 'Đông');
+    expect(directionName(135), 'Đông Nam');
+    expect(directionName(180), 'Nam');
+    expect(directionName(225), 'Tây Nam');
+    expect(directionName(270), 'Tây');
+    expect(directionName(315), 'Tây Bắc');
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test('Can Chi, mệnh', () {
+    expect(getCanChi(DateTime(1990)), 'Canh Ngọ');
+    expect(getCanChi(DateTime(2024)), 'Giáp Thìn');
   });
 }

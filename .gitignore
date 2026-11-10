@@ -39,3 +39,9 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+# Phát triển cục bộ (xpromo-flutter)
+pubspec_overrides.yaml
+
+# File sinh tự động của Flutter (iOS)
+**/ios/Flutter/ephemeral/

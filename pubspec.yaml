@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.1.4+8
+version: 1.2.0+9
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -40,6 +40,13 @@ dependencies:
   flutter_compass: 0.8.1
   permission_handler: 13.0.2
   url_launcher: 6.3.3
+
+  # Quảng bá chéo: https://github.com/thanhhuan1990/xpromo-flutter
+  # Phát triển cục bộ: pubspec_overrides.yaml trỏ tới ../xpromo-flutter (không commit).
+  xpromo:
+    git:
+      url: https://github.com/thanhhuan1990/xpromo-flutter.git
+      ref: 1.0.3
 
 dev_dependencies:
   flutter_test:

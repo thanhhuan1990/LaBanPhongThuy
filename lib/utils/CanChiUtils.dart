@@ -111,3 +111,10 @@ String getDirection(double heading) {
   }
   return "Invalid value";
 }
+
+/// Tên hướng (8 hướng) cho góc [0, 360).
+String directionName(double heading) {
+  const List<String> names = ['Bắc', 'Đông Bắc', 'Đông', 'Đông Nam', 'Nam', 'Tây Nam', 'Tây', 'Tây Bắc'];
+  final int i = (((heading % 360) + 22.5) ~/ 45) % 8;
+  return names[i];
+}

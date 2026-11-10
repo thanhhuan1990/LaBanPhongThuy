@@ -14,7 +14,8 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.huanhuynh.la_ban_phong_thuy"
-    compileSdk = flutter.compileSdkVersion
+    // Google Play: từ 31/08/2026 bản cập nhật phải target Android 16 (API 36) trở lên.
+    compileSdk = Math.max(flutter.compileSdkVersion as int, 36)
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -25,7 +26,7 @@ android {
     defaultConfig {
         applicationId = "com.huanhuynh.la_ban_phong_thuy"
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }

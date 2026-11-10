@@ -7,6 +7,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:la_ban_phong_thuy/utils/CanChiUtils.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../ui/palette.dart';
 import '../utils/ad_helper.dart';
 import '../utils/logger.dart';
 
@@ -142,20 +143,10 @@ class CompassController extends GetxController {
     sensorStatus.value = CompassSensorStatus.ready;
   }
 
-  MaterialColor getAppColor() {
-    String nguHanh = getNguHanh(year.value);
-    if (nguHanh.contains('Kim')) {
-      return Colors.yellow;
-    } else if (nguHanh.contains('Mộc')) {
-      return Colors.green;
-    } else if (nguHanh.contains('Thủy')) {
-      return Colors.blue;
-    } else if (nguHanh.contains('Hoả')) {
-      return Colors.red;
-    } else {
-      return Colors.brown;
-    }
-  }
+  /// Màu chủ đạo theo ngũ hành mệnh của năm sinh.
+  Color getAppColor() => ElementTheme.of(year.value).primary;
+
+  int _bannerRetries = 0;
 
   Future<void> _createAnchoredBanner() async {
     if (anchoredBanner.value != null) {
@@ -163,7 +154,7 @@ class CompassController extends GetxController {
     }
     final AnchoredAdaptiveBannerAdSize? size = await AdSize.getLargeAnchoredAdaptiveBannerAdSizeWithOrientation(
       Orientation.portrait,
-      Get.width.truncate(),
+      (Get.width > 0 ? Get.width : 360).truncate(),
     );
 
     if (size == null) {
@@ -183,6 +174,11 @@ class CompassController extends GetxController {
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           logError('$BannerAd failedToLoad: $error');
           ad.dispose();
+          // Không có quảng cáo (no fill/mạng): thử lại sau, tối đa vài lần.
+          if (_bannerRetries < 3) {
+            _bannerRetries++;
+            Future<void>.delayed(Duration(seconds: 30 * _bannerRetries), _createAnchoredBanner);
+          }
         },
         onAdOpened: (Ad ad) => logDebug('$BannerAd onAdOpened.'),
         onAdClosed: (Ad ad) => logDebug('$BannerAd onAdClosed.'),
