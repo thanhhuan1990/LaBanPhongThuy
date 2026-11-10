@@ -45,3 +45,4 @@ pubspec_overrides.yaml
 
 # File sinh tự động của Flutter (iOS)
 **/ios/Flutter/ephemeral/
+.xfer/

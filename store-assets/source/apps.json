@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "version": "2026.11.10.3",
+  "developer": "HuanHuynh",
+  "apps": [
+    {
+      "id": "com.huanhuynh.lichvannien",
+      "name": "Lịch Vạn Niên 2027",
+      "tagline": "Lịch âm, ngày tốt xấu, giờ hoàng đạo, nhắc rằm mùng 1",
+      "emoji": "📅",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.lichvannien.png",
+      "groups": [
+        "spiritual",
+        "daily",
+        "household"
+      ],
+      "priority": 90,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "Vietnamese Lunar Calendar 2027",
+          "tagline": "Lunar dates, good & bad days, auspicious hours"
+        },
+        "zh": {
+          "name": "越南万年历 2027",
+          "tagline": "农历、吉凶日、黄道吉时，初一十五提醒"
+        }
+      }
+    },
+    {
+      "id": "com.huanhuynh.sochitieu",
+      "name": "Sổ Chi Tiêu",
+      "tagline": "Ghi thu chi hằng ngày, biết tiền đi đâu mỗi tháng",
+      "emoji": "💰",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.sochitieu.png",
+      "groups": [
+        "household",
+        "finance",
+        "daily"
+      ],
+      "priority": 80,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "Expense Book",
+          "tagline": "Track daily income & spending, see where money goes"
+        },
+        "zh": {
+          "name": "记账本",
+          "tagline": "记录每日收支，月月清楚钱花在哪"
+        }
+      }
+    },
+    {
+      "id": "com.huanhuynh.waterreminder",
+      "name": "Đủ Nước – Nhắc uống nước",
+      "tagline": "Nhắc uống nước đúng giờ, đủ lượng theo cân nặng",
+      "emoji": "💧",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.waterreminder.png",
+      "groups": [
+        "health",
+        "daily"
+      ],
+      "priority": 80,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "Water Reminder",
+          "tagline": "Drink on time, the right amount for your weight"
+        },
+        "zh": {
+          "name": "喝水提醒",
+          "tagline": "按时喝水，按体重算出每日饮水量"
+        }
+      }
+    },
+    {
+      "id": "com.huanhuynh.numerology",
+      "name": "Thần Số Học",
+      "tagline": "Khám phá con số chủ đạo và vận số của bạn",
+      "emoji": "🔢",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.numerology.png",
+      "groups": [
+        "spiritual"
+      ],
+      "priority": 70,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "Numerology",
+          "tagline": "Discover your life path number and destiny"
+        },
+        "zh": {
+          "name": "数字命理",
+          "tagline": "探索你的生命灵数与运势"
+        }
+      }
+    },
+    {
+      "id": "com.huanhuynh.la_ban_phong_thuy",
+      "name": "Tự Xem Phong Thuỷ",
+      "tagline": "La bàn phong thuỷ, xem hướng nhà hợp tuổi",
+      "emoji": "🧭",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.la_ban_phong_thuy.png?v=2",
+      "groups": [
+        "spiritual",
+        "household"
+      ],
+      "priority": 60,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "Feng Shui Compass",
+          "tagline": "Feng shui compass, find house directions for your age"
+        },
+        "zh": {
+          "name": "风水罗盘",
+          "tagline": "风水罗盘，查看与你年命相合的房屋朝向"
+        }
+      }
+    },
+    {
+      "id": "com.huanhuynh.spin_the_wheel",
+      "name": "Wheel of Anything",
+      "tagline": "Vòng quay may mắn – để vòng quay quyết định giúp bạn",
+      "emoji": "🎡",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.spin_the_wheel.png?v=2",
+      "groups": [
+        "fun"
+      ],
+      "priority": 50,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "Wheel of Anything",
+          "tagline": "Spin the wheel and let it decide for you"
+        },
+        "zh": {
+          "name": "幸运转盘",
+          "tagline": "转一转，让转盘帮你做决定"
+        }
+      }
+    },
+    {
+      "id": "com.huanhuynh.cyclecare",
+      "name": "Hoa Nguyệt: Lịch kinh nguyệt",
+      "tagline": "Lịch kinh nguyệt, ngày rụng trứng, theo dõi thai kỳ",
+      "emoji": "🌸",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.cyclecare.png",
+      "groups": [
+        "health"
+      ],
+      "priority": 70,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "Hoa Nguyet: Period Tracker",
+          "tagline": "Period calendar, ovulation days, pregnancy tracking"
+        },
+        "zh": {
+          "name": "花月：经期日历",
+          "tagline": "经期日历、排卵日、孕期追踪"
+        }
+      }
+    },
+    {
+      "id": "com.huanhuynh.freshnest",
+      "name": "Tủ Lạnh Nhà Mình",
+      "tagline": "Quản lý tủ lạnh, nhắc hạn sử dụng thực phẩm",
+      "emoji": "🧊",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.freshnest.png",
+      "groups": [
+        "household",
+        "health"
+      ],
+      "priority": 70,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "My Fridge",
+          "tagline": "Manage your fridge, get expiry date reminders"
+        },
+        "zh": {
+          "name": "我家冰箱",
+          "tagline": "管理冰箱食材，临期提醒"
+        }
+      }
+    },
+    {
+      "id": "com.huanhuynh.vankhan",
+      "name": "Văn Khấn 3 Miền",
+      "tagline": "Văn khấn, mâm lễ, lịch cúng chuẩn Bắc – Trung – Nam",
+      "emoji": "🙏",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.vankhan.png",
+      "groups": [
+        "spiritual",
+        "daily"
+      ],
+      "priority": 85,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "Vietnamese Prayers",
+          "tagline": "Vietnamese prayers, offering trays and worship calendar"
+        },
+        "zh": {
+          "name": "越南祭文",
+          "tagline": "越南祭拜祷文、供品摆放与祭拜日历"
+        }
+      }
+    },
+    {
+      "id": "com.huanhuynh.xinxam",
+      "name": "Xin Xăm – Gieo Quẻ",
+      "tagline": "Xin xăm Quan Âm, Quan Thánh và gieo quẻ Kinh Dịch",
+      "emoji": "🎋",
+      "icon": "https://thanhhuan1990.github.io/xpromo/icons/com.huanhuynh.xinxam.png",
+      "groups": [
+        "spiritual",
+        "fun"
+      ],
+      "priority": 85,
+      "enabled": true,
+      "i18n": {
+        "en": {
+          "name": "Fortune Sticks – Xin Xam",
+          "tagline": "Guan Yin & Guan Yu fortune sticks, I Ching casting"
+        },
+        "zh": {
+          "name": "求签 – 观音灵签",
+          "tagline": "观音灵签、关帝灵签与易经起卦"
+        }
+      }
+    }
+  ]
+}

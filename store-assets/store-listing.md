@@ -20,3 +20,11 @@ Feng shui / Spirituality (Tâm linh) · Compass (La bàn) · Lifestyle · Home &
 - **Ads:** Có (banner, interstitial).
 - **Quyền:** vị trí khi dùng app (tuỳ chọn, phục vụ la bàn), Internet.
 - **Privacy policy:** cập nhật link nếu đã có trang riêng cho app.
+
+## Ảnh store (Google Play) – 1.2.0
+| File | Dùng cho | Kích thước |
+|---|---|---|
+| `labanphongthuy-feature-graphic-1024x500.png` | Feature graphic | 1024×500, 24-bit |
+| `screenshots/labanphongthuy-01…05-*.png` | Phone screenshots | 5 ảnh 1080×1920, 24-bit |
+
+Dựng lại: `python3 store-assets/source/build_assets.py` (giao diện vẽ lại theo `CompassStatefulWidget.dart` / `author_card.dart`, ảnh la bàn – kim – ấn triện lấy từ `assets/`; không có quảng cáo).
