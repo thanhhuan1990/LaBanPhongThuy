@@ -457,11 +457,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "1.0.3"
-      resolved-ref: d5ffbc7bb9b098a7bc3cd02bc11f827ae57253bd
+      ref: "1.0.7"
+      resolved-ref: 6c378f6cd1118f8c4ebaf06d6664797077e9a82d
       url: "https://github.com/thanhhuan1990/xpromo-flutter.git"
     source: git
-    version: "1.0.3"
+    version: "1.0.7"
   yaml:
     dependency: transitive
     description:
