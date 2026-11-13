@@ -2,8 +2,45 @@
 
 Package: `com.huanhuynh.la_ban_phong_thuy` · Version 1.2.0 (9) · Danh mục: **Lifestyle** (Phong cách sống) – thay thế: Tools · Ngôn ngữ mặc định: **vi-VN**
 
-## Tags gợi ý (Play Console → Store settings, tối đa 5)
-Feng shui / Spirituality (Tâm linh) · Compass (La bàn) · Lifestyle · Home & Garden (Nhà cửa) · Astrology. Tag nào không có đúng tên thì chọn tag gần nghĩa nhất (dự phòng: Culture, Tools).
+
+## Listing trên Play Console (cập nhật 13/11/2026)
+**Danh mục:** Lifestyle (đã đổi từ Maps & Navigation trên Play Console 13/11/2026).
+**Tags (Play Console):** Horoscope · Lifestyle · Interior design · House & home · Measurement.
+
+### Tên ứng dụng (≤ 30 ký tự)
+Tự Xem Phong Thuỷ – La Bàn
+
+### Mô tả ngắn (≤ 80 ký tự)
+La bàn phong thuỷ theo tuổi: xem hướng nhà, cửa, bếp, bàn làm việc hợp mệnh
+
+### Mô tả đầy đủ (≤ 4000 ký tự)
+```
+Tự Xem Phong Thuỷ là la bàn phong thuỷ Bát trạch trên điện thoại: chọn năm sinh và giới tính, la bàn tự hiện đúng cung phi của bạn và xoay theo hướng thật, giúp bạn biết ngay hướng nhà, hướng cửa, hướng bếp hay bàn làm việc đang tốt hay xấu.
+
+🧭 LA BÀN XOAY THEO HƯỚNG THẬT
+• Hiện số độ và tên hướng (Bắc, Đông Bắc, Đông Nam…) ngay khi bạn xoay điện thoại
+• Mặt la bàn đầy đủ 24 sơn hướng, vạch độ rõ ràng, kim chỉ chính xác
+• Đặt điện thoại nằm ngang, hướng đầu máy về phía cần xem là đọc được hướng
+
+☯️ ĐÚNG CUNG PHI CỦA BẠN
+• Chọn Nam/Nữ và năm sinh âm lịch – ứng dụng tự tính Mệnh (nạp âm ngũ hành), Can Chi và Cung phi
+• 8 mặt la bàn riêng cho 8 cung: Càn, Khảm, Cấn, Chấn, Tốn, Ly, Khôn, Đoài
+• Thấy ngay 4 hướng tốt (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) và 4 hướng xấu (Tuyệt Mệnh, Ngũ Quỷ, Lục Sát, Hoạ Hại) của bạn
+• Màu giao diện đổi theo ngũ hành của mệnh
+
+🏠 DÙNG KHI NÀO
+• Chọn hướng nhà khi mua, thuê hoặc xây nhà
+• Kê giường ngủ, bàn làm việc, bàn thờ, đặt bếp theo hướng hợp tuổi
+• Xem hướng cửa chính, cửa phòng, hướng ngồi làm việc
+• Xem cho cả nhà: đổi năm sinh, giới tính là có ngay la bàn của từng người
+
+📜 LA BÀN CỦA THẦY NGUYỄN NHAN THÁI THẠNH
+Mặt la bàn do thầy Nguyễn Nhan Thái Thạnh biên soạn. Cần xem phong thuỷ kỹ hơn, bạn có thể liên hệ thầy trực tiếp qua điện thoại hoặc email ngay trong ứng dụng.
+
+Lưu ý: theo phong thuỷ Bát trạch, hướng nhà thường được xem theo tuổi của gia chủ. Để la bàn chính xác, hãy để điện thoại xa nam châm, đồ kim loại và thiết bị điện; nếu kim lệch, xoay điện thoại theo hình số 8 vài lần để hiệu chỉnh.
+
+Ứng dụng miễn phí và có quảng cáo. Nội dung phong thuỷ mang tính tham khảo theo quan niệm truyền thống.
+```
 
 ## Có gì mới – 1.2.0 (≤ 500 ký tự)
 ```
