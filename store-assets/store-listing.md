@@ -1,6 +1,6 @@
 # Tự Xem Phong Thuỷ – Store listing (Google Play)
 
-Package: `com.huanhuynh.la_ban_phong_thuy` · Version 1.2.0 (9) · Danh mục: **Lifestyle** (Phong cách sống) – thay thế: Tools · Ngôn ngữ mặc định: **vi-VN**
+Package: `com.huanhuynh.la_ban_phong_thuy` · Version 1.2.1 (10) · Danh mục: **Lifestyle** (Phong cách sống) – thay thế: Tools · Ngôn ngữ mặc định: **vi-VN**
 
 
 ## Listing trên Play Console (cập nhật 13/11/2026)
@@ -40,6 +40,16 @@ Mặt la bàn do thầy Nguyễn Nhan Thái Thạnh biên soạn. Cần xem phon
 Lưu ý: theo phong thuỷ Bát trạch, hướng nhà thường được xem theo tuổi của gia chủ. Để la bàn chính xác, hãy để điện thoại xa nam châm, đồ kim loại và thiết bị điện; nếu kim lệch, xoay điện thoại theo hình số 8 vài lần để hiệu chỉnh.
 
 Ứng dụng miễn phí và có quảng cáo. Nội dung phong thuỷ mang tính tham khảo theo quan niệm truyền thống.
+```
+
+## Có gì mới – 1.2.1 (≤ 500 ký tự)
+```
+<vi-VN>
+• Mục "Ứng dụng khác": app đã cài hiện đúng nút "Mở" (trước đây có lúc vẫn hiện "Cài")
+• Thêm nút "Xem thêm" để xem thêm ứng dụng cùng nhà phát triển
+• Gợi ý ứng dụng phù hợp hơn với bạn
+• Cải thiện độ ổn định
+</vi-VN>
 ```
 
 ## Có gì mới – 1.2.0 (≤ 500 ký tự)
